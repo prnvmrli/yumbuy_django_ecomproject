@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="">
+<head>
+<title>Sislaf</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'hm/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+
+.dropbtn {
+  background-color: cornflowerblue;
+  border-radius: 4px;
+  color: white;
+  height: 35px;
+  width: 80px;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-left: 46px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: gray;
+  border-radius: 4px;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: all 1s ease-in;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: cadetblue;
+}
+
+  .abcd{
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: animate 16s ease-in-out infinite;
+  }
+
+  @keyframes animate{
+    0%,100%{
+      background-image:url({% static 'hm/images/demo/backgrounds/1.jpg' %});
+    }
+    25%{
+      background-image:url({% static 'hm/images/demo/backgrounds/2.jpg' %});
+    }
+    50%{
+      background-image:url({% static 'hm/images/demo/backgrounds/4.jpg' %});
+    }
+    75%{
+      background-image:url({% static 'hm/images/demo/backgrounds/7.jpg' %});
+    }
+  }
+
+
+</style>
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class='abcd'>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  
+
+
+<div class="dropdown" style="padding-top: 20px;">
+  <button class="dropbtn">Filter</button>
+    <div class="dropdown-content">
+      <a href="/">All</a>
+      {% for i in ct %}
+      <a href={{i.get_url}}>{{i.name}}</a>
+      {% endfor %}
+    </div>
+</div>
+
+
+    <!-- ################################################################################################ -->
+    <div class="heading" style="text-align: center; padding-top: 140px;">
+      <article>
+        <h3 style="font-size: 50px; color: whitesmoke;">QUALITY FOOD ITEMS</h3>
+        <p style="font-size: 20px;color: whitesmoke; font-family: Arial, Helvetica, sans-serif;">Register with us and have quality food items delivered to your doorstep.</p>
+      </article>
+    </div>
+    
+  <div id="pageintro" class="hoc clear">
+    <div class="wrapper row0" style="padding-bottom: 10px; padding-left: 1000px;">
+      <div id="topbar" class="hoc clear">
+      <div class="fl_right">
+        <ul class="nospace">
+          <li id="searchform" style="color: whitesmoke;">
+            <div>
+              <form action="{% url 'search' %}" method="get">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Search items" name="q">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+  <!-- ################################################################################################ -->
+</div>
+
+
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        {% for i in pg.object_list %}
+        <li class="one_third">
+          <figure><a class="imgover" href={{i.get_url}}><img src="{{i.img.url}}" alt="" style="height: 200;width: 300;"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{i.desc|truncatechars:100}}</p>
+              <br>
+
+            </figcaption>
+          </figure>
+        </li>
+
+
+{% endfor %}
+
+
+
+      </ul>
+    </section>
+    <center>
+
+{% for p in pg.paginator.page_range %}
+
+<a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} active {% endif %}" >{{p}}</a>
+
+
+{% endfor %}
+    </center>
+
+
+
+
+    <hr class="btmspace-80">
+
+    <div class="clear"></div>
+  </main>
+</div>
+
+</div>
+
+<script src="{% static 'hm/layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% load static %}
+<html lang="">
+<head>
+<title>Sislaf</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'hm/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<style>
+  .badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff3737;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px; 
+}
+
+.dropbtn2 {
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown2 {
+  position: relative;
+  display: inline-block;
+  padding-left: 46px;
+}
+
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  border-radius: 4px;
+  background-color: gray;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: all 1s ease-in;
+  z-index: 1;
+}
+
+.dropdown-content2 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content2 a:hover {background-color: #f1f1f1}
+
+.dropdown2:hover .dropdown-content2 {
+  display: block;
+}
+
+</style>
+<body id="top">
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left" style="padding-top: 10px; color: whitesmoke;">
+        <!-- ################################################################################################ -->
+        <h1><a href="/">AVODHA SHOPPING</a></h1>
+        <!-- ################################################################################################ -->
+      </div>
+      <nav id="mainav" class="fl_right" style="padding-top: 8px; color: whitesmoke;">
+        <!-- ################################################################################################ -->
+        <ul class="clear">
+          <div class="dropdown2">
+            <li class="dropbtn2"><i class='fas fa-user-alt' style='font-size:19px'></i></li>
+              <div class="dropdown-content2">
+                {% if user.is_authenticated %}
+                <a href="/">Hi {{user.username}}</a>
+                <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+              </div>
+          </div>
+          <li class="active"><a href="/"><i class="fa fa-home" style="font-size:22px; color: whitesmoke;"></i></a></li>
+          <li><a class="active" href="{% url 'cartDetails' %}"><i class="fa fa-shopping-cart" style="font-size:19px; color: whitesmoke;"></i><span class='badge badge-warning' id='lblCartCount'>{{itc}}</span></a></li>
+        </ul>
+        <!-- ################################################################################################ -->
+      </nav>
+    </header>
+</div>
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
